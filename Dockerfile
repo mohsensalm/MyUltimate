@@ -32,4 +32,3 @@ RUN dotnet publish PlatformService.csproj -c $BUILD_CONFIGURATION -o /app/publis
 FROM base AS final
 WORKDIR /app
 
-https://www.youtube.com/watch?v=DgVjEo3OGBI&ab_channel=LesJackson
