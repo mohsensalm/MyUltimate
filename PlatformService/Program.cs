@@ -13,6 +13,16 @@ builder.Services.AddDbContext<AppDBContext>(opt => opt.UseInMemoryDatabase("InMe
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(8080); // Enable HTTP on port 8080
+    serverOptions.ListenAnyIP(7245, listenOptions =>
+    {
+        listenOptions.UseHttps();
+    });
+
+});
+
 
 var app = builder.Build();
 
