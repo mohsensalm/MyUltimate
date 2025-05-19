@@ -32,6 +32,7 @@ PrepDB.PropPupelition(app);
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+
 }
 
 app.UseHttpsRedirection();
