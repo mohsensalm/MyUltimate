@@ -12,16 +12,13 @@ namespace PlatformService.Data
         }
         public void CreatePlatform(Platform platform)
         {
-            if (platform is  null)
-            {
-                throw new ArgumentNullException();
-            }
             _context.Platforms.Add(platform);
+            return;
         }
 
-        public IEnumerable<Platform> GetAllPlatforms()
+        public bool SaveChanges()
         {
-            return _context.Platforms.ToList();
+            return (_context.SaveChanges() >= 0);
         }
 
         public Platform GetPlatformByID(int id)
@@ -29,9 +26,9 @@ namespace PlatformService.Data
             return _context.Platforms.FirstOrDefault(x => x.ID == id);
         }
 
-        public bool SaveChanges()
+        public IEnumerable<Platform> GetAllPlatforms()
         {
-            return (_context.SaveChanges() >= 0);
+            return _context.Platforms.ToList();
         }
     }
 }

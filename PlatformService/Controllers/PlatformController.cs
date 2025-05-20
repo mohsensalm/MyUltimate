@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using CommandsService.SyncDataServices.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlatformService.Data;
 using PlatformService.DTOs;
 using PlatformService.Model;
+using System.Threading.Tasks;
 
 namespace PlatformService.Controllers
 {
@@ -12,11 +14,13 @@ namespace PlatformService.Controllers
     {
         private readonly IPlatformRepo _repository;
         private readonly IMapper _mapper;
+        private readonly ICommandDataClient _dataClient;
 
-        public PlatformController(IPlatformRepo repo, IMapper mapper)
+        public PlatformController(IPlatformRepo repo, IMapper mapper, ICommandDataClient dataClient)
         {
             _repository = repo;
             _mapper = mapper;
+            _dataClient= dataClient;
         }
         [HttpGet]
         public ActionResult<IEnumerable<PlatformReadDto>> GetAllPlatform()
@@ -37,14 +41,25 @@ namespace PlatformService.Controllers
             return NotFound();
         }
         [HttpPost]
-        public ActionResult<PlatformReadDto> CreatePlatform(PlatformCreateDto platformCreateDto)
+        public async Task<ActionResult<PlatformReadDto>> CreatePlatform(PlatformCreateDto platformCreateDto)
         {
             var platformModel = _mapper.Map<Platform>(platformCreateDto);
             _repository.CreatePlatform(platformModel);
             _repository.SaveChanges();
             var platformReadDto = _mapper.Map<PlatformReadDto>(platformModel);
+
+            try
+            {
+                await _dataClient.SendPlatformToCommand(platformReadDto);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+
             return CreatedAtRoute(nameof(GetPlatformByID), new { Id = platformReadDto.ID }, platformReadDto);
         }
-
     }
 }

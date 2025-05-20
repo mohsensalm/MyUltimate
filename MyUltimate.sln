@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService", "Platform
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K8S", "K8S\K8S.csproj", "{4D90DFDE-B872-4518-980B-46A86B293829}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandsService", "CommandsService\CommandsService.csproj", "{34AA705D-73B3-4862-8023-BC669E5AC8C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{FEB9A60C-6A93-4F9F-871B-B4FCDAE2D7D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +27,20 @@ Global
 		{4D90DFDE-B872-4518-980B-46A86B293829}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D90DFDE-B872-4518-980B-46A86B293829}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D90DFDE-B872-4518-980B-46A86B293829}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34AA705D-73B3-4862-8023-BC669E5AC8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34AA705D-73B3-4862-8023-BC669E5AC8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34AA705D-73B3-4862-8023-BC669E5AC8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34AA705D-73B3-4862-8023-BC669E5AC8C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEB9A60C-6A93-4F9F-871B-B4FCDAE2D7D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEB9A60C-6A93-4F9F-871B-B4FCDAE2D7D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEB9A60C-6A93-4F9F-871B-B4FCDAE2D7D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEB9A60C-6A93-4F9F-871B-B4FCDAE2D7D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FEB9A60C-6A93-4F9F-871B-B4FCDAE2D7D1} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F7673FF-39BF-4E91-8396-133C0E6A7A3B}
