@@ -33,7 +33,7 @@ namespace CommandsService
                 app.MapOpenApi();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

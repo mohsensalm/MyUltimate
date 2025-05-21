@@ -55,7 +55,7 @@ namespace PlatformService.Controllers
             catch (Exception ex)
             {
 
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.WriteLine("⚠️ SSL Error: " + ex.InnerException?.Message);
                 return StatusCode(500, "Internal server error");
             }
 
