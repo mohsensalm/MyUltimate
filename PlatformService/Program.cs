@@ -5,23 +5,21 @@ using PlatformService.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-
-builder.Services.AddDbContext<AppDBContext>(opt => opt.UseInMemoryDatabase("InMemory"));
-
-
+// Configure HTTP client for command data service
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>()
-    .ConfigurePrimaryHttpMessageHandler(static () => new HttpClientHandler
+    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
     {
         ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
-
     });
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
+// Enable OpenAPI
 builder.Services.AddOpenApi();
+
+// Configure Kestrel server options
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
     serverOptions.ListenAnyIP(8080); // Enable HTTP on port 8080
@@ -29,31 +27,33 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     {
         listenOptions.UseHttps();
     });
-
 });
-var handler = new HttpClientHandler();
-handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
-var client = new HttpClient(handler);
-
-
+// Log Command Service Endpoint
 Console.WriteLine($"--> Command Service Endpoint: {builder.Configuration["CommandsService"]};");
+
+// Configure DbContext based on environment
+//if (builder.Environment.IsDevelopment())
+//{
+//    // Use in-memory database for development
+//    builder.Services.AddDbContext<AppDBContext>(opt => opt.UseInMemoryDatabase("InMemory"));
+//}
+//else
+//{
+    // Use SQL Server for production
+    Console.WriteLine("---> using SQL Server db");
+    builder.Services.AddDbContext<AppDBContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("PlatformConnection")));
+//}
 
 var app = builder.Build();
 
-PrepDB.PropPupelition(app);
+// Prepare the database if needed
+// PrepDB.PropPupelition(app, app.Environment.IsProduction());
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-
-}
-
-//app.UseHttpsRedirection();
-
+// Configure the HTTP request pipeline
 app.UseAuthorization();
-
 app.MapControllers();
+app.MapOpenApi();
 
 app.Run();
