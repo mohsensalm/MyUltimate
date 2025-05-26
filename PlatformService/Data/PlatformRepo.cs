@@ -1,4 +1,4 @@
-﻿using PlatformService.Model;
+﻿using Domain.Model;
 
 namespace PlatformService.Data
 {

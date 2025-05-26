@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PlatformService.Model;
+﻿using Domain.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace PlatformService.Data
 {

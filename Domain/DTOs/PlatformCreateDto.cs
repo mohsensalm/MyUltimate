@@ -1,4 +1,4 @@
-﻿namespace PlatformService.DTOs
+﻿namespace Domain.DTOs
 {
     public record PlatformCreateDto
     {

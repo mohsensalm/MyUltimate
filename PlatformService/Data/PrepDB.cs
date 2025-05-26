@@ -34,9 +34,9 @@ namespace PlatformService.Data
                 Console.WriteLine("sedeing data");
                 context.Platforms.AddRange
                     (
-                    new Model.Platform() { Name = "dot net", Publisher = "microsoft" },
-                    new Model.Platform() { Name = "dot zet", Publisher = "microdone" },
-                    new Model.Platform() { Name = "java", Publisher = "unown" }
+                    new Domain.Model.Platform() { Name = "dot net", Publisher = "microsoft" },
+                    new Domain.Model.Platform() { Name = "dot zet", Publisher = "microdone" },
+                    new Domain.Model.Platform() { Name = "java", Publisher = "unown" }
                     );
                 context.SaveChanges();
             }

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using CommandsService.SyncDataServices.Http;
+using Domain.DTOs;
+using Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 using PlatformService.Data;
-using PlatformService.DTOs;
-using PlatformService.Model;
 using System.Threading.Tasks;
 
 namespace PlatformService.Controllers
@@ -16,7 +16,7 @@ namespace PlatformService.Controllers
         private readonly IMapper _mapper;
         private readonly ICommandDataClient _dataClient;
 
-        public PlatformController(IPlatformRepo repo, IMapper mapper, ICommandDataClient dataClient)
+        public PlatformController(IPlatformRepo repo, IMapper mapper, ICommandDataClient dataClient )
         {
             _repository = repo;
             _mapper = mapper;

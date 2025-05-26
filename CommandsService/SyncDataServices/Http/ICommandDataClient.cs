@@ -1,5 +1,5 @@
 ﻿
-using PlatformService.DTOs;
+using Domain.DTOs;
 
 namespace CommandsService.SyncDataServices.Http
 {

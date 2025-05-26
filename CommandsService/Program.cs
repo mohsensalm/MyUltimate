@@ -1,5 +1,7 @@
 
+using CommandsService.Data;
 using CommandsService.SyncDataServices.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace CommandsService
 {
@@ -9,7 +11,11 @@ namespace CommandsService
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             // Add services to the container.
+
+            builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+            builder.Services.AddScoped<ICommandRepo, CommandRepo>();
 
             builder.Services.AddControllers();
             //builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>().ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using PlatformService.DTOs;
-using PlatformService.Model;
+using Domain.DTOs;
+using Domain.Model;
 
 namespace PlatformService.Profiles
 {
