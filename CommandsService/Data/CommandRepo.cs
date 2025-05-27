@@ -1,4 +1,5 @@
 ﻿using CommandsService.Model;
+using System;
 
 namespace CommandsService.Data
 {
@@ -79,6 +80,12 @@ namespace CommandsService.Data
         public IEnumerable<Command> GetAllCommands()
         {
             return _context.Commands.ToList();
+        }
+
+        public bool ExternalPlatformExists(int externalPlatformId)
+        {
+            return _context.Platforms.Any(p => p.Id == externalPlatformId);
+
         }
     }
 }

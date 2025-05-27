@@ -1,5 +1,6 @@
 
 using CommandsService.Data;
+using CommandsService.EventProcessing;
 using CommandsService.SyncDataServices.Http;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ namespace CommandsService
 
             builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
             builder.Services.AddScoped<ICommandRepo, CommandRepo>();
+            builder.Services.AddSingleton<IEventProcessor, EventProcessor>();
 
             builder.Services.AddControllers();
             //builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>().ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler

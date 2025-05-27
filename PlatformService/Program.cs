@@ -1,13 +1,17 @@
 using CommandsService.SyncDataServices.Http;
 using Microsoft.EntityFrameworkCore;
+using PlatformService.AsyncDataServices;
 using PlatformService.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>(); // Add MessageBusClient as a service>
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 
 // Configure HTTP client for command data service
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>()
