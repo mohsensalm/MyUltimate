@@ -1,3 +1,4 @@
+using CommandsService.AsyncDataServices;
 using CommandsService.SyncDataServices.Http;
 using Microsoft.EntityFrameworkCore;
 using PlatformService.AsyncDataServices;
@@ -12,6 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
+
+builder.Services.AddHostedService<MessageBusSubscriber>(); // Register the message bus subscriber as a hosted service
 
 // Configure HTTP client for command data service
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>()
